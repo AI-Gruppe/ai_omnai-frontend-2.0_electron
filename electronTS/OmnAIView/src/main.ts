@@ -6,7 +6,7 @@ import * as fs from "fs-extra";
 // Prüfe, ob die App über Squirrel Startup gestartet wurde (Windows-Installer-Handling)
 if (require("electron-squirrel-startup")) app.quit();
 
-let backendProcess: ChildProcess | null = null; // Backend-Prozess-Referenz
+let backendProcess: ChildProcess | null = null; 
 
 // Backend starten
 function startBackend(): void {

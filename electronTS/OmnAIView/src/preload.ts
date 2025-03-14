@@ -34,5 +34,5 @@ interface OmnAIAPI {
     },
   };
   
-  // Die API sicher in `window.omnai` verfügbar machen
+  // Die API sicher verfügbar machen
   contextBridge.exposeInMainWorld("omnai", omnaiAPI);

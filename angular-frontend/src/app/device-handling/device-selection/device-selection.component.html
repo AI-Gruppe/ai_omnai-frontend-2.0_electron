@@ -50,7 +50,7 @@
               <input
                 type="checkbox"
                 [checked]="selectedUUIDs().has(device.UUID)"
-                (change)="serverObj.toggleDevice(device.UUID)"
+                (change)="serverObj.toggleSelectStateOfDevice(device.UUID)"
                 [disabled]="serverObj.isConnected()"
                 class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
               <label  [style.color]="dataService.curveColors()[device.UUID] || '#000000'"  class="ml-2">{{ device.UUID }}</label>

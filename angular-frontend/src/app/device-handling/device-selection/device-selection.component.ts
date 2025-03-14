@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddDeviceServerComponent } from './add-device-server.component';
 
 @Component({
@@ -17,12 +17,12 @@ import { AddDeviceServerComponent } from './add-device-server.component';
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatListModule, MatCheckboxModule],
   templateUrl: './device-selection.component.html',
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeviceSelectionComponent {
-  dataService = inject(DataService);
-  selectedUUIDs = signal<Set<string>>(new Set());
+  readonly dataService = inject(DataService);
+  readonly #dialog = inject(MatDialog);
+  readonly selectedUUIDs = signal<Set<string>>(new Set());
 
   toggleDeviceSelection(uuid: string) {
     this.selectedUUIDs.update(selected => {
@@ -36,15 +36,14 @@ export class DeviceSelectionComponent {
     });
   }
 
-  readonly #dialog = inject(MatDialog);
   addNewDeviceServer() {
     const dialogRef = this.#dialog.open(AddDeviceServerComponent, {
-      minWidth: "30vw"
+      minWidth: '30vw',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result)
+        console.log(result);
         this.dataService.addServer(result);
       }
     });

@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { DataFormat, ServerDescription } from './omnAIServer';
-
+import { ServerDescription } from './omnAIServer';
+import { DataFormat } from './data.models';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  #servers = signal<Record<string, ServerDescription>>({});
-  servers = this.#servers.asReadonly();
-
-  httpClient = inject(HttpClient);
+  readonly httpClient = inject(HttpClient);
+  readonly #servers = signal<Record<string, ServerDescription>>({});
+  readonly servers = this.#servers.asReadonly();
 
   data = computed(() => {
     const combinedData: Record<string, DataFormat[]> = {};
@@ -79,5 +78,4 @@ export class DataService {
     const server = this.servers()[serverURL];
     if (server) server.disconnect();
   }
-
 }

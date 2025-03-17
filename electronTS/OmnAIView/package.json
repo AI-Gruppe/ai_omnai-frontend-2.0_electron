@@ -1,30 +1,31 @@
 {
   "name": "OmnAIView",
-  "version": "1.3.0",
-  "main": "electronTS/OmnAIView/dist/main.js",
+  "productName": "omnaiview",
+  "version": "1.1.0",
+  "description": "My Electron application description",
+  "main": "dist/main.js",
   "scripts": {
-    "prestart": "npm --prefix angular-frontend run build",
-    "prepackage": "npm --prefix angular-frontend run build && tsc --project electronTs/OmnAIView/tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && npm  --prefix electronTS/OmnAIView start",
-    "package": "npm run  --prefix electronTS/OmnAIView package",
-    "premake": "npm run package",
-    "make": "npm run --prefix electronTS/OmnAIView make",
-    "publish": "npm run  --prefix electronTS/OmnAIView publish",
-    "build": "tsc --project electronTs/OmnAIView/tsconfig.json",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx ."
   },
-  "author": "Auto-Intern GmbH",
-  "license": "ISC",
-  "description": "Hier eine Beschreibung",
- "devDependencies": {
+  "keywords": [],
+  "author": {
+    "name": "AKMaily",
+    "email": "anna.theimann@outlook.de"
+  },
+  "license": "MIT",
+  "devDependencies": {
     "@electron-forge/cli": "^7.7.0",
-    "@electron-forge/core": "^7.7.0",
     "@electron-forge/maker-deb": "^7.7.0",
     "@electron-forge/maker-rpm": "^7.7.0",
     "@electron-forge/maker-squirrel": "^7.7.0",
     "@electron-forge/maker-zip": "^7.7.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.7.0",
     "@electron-forge/plugin-fuses": "^7.7.0",
+    "@electron-forge/plugin-webpack": "^7.7.0",
     "@electron/fuses": "^1.8.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
@@ -38,10 +39,10 @@
     "style-loader": "^3.3.4",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
-    "typescript": "~5.8.2"
+    "typescript": "~4.5.4"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
-    "material-icons": "^1.13.13"
+    "fs-extra": "^11.3.0"
   }
 }

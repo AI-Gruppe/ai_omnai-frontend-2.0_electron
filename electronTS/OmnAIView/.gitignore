@@ -93,4 +93,4 @@ dist/
 
 # Electron-Forge
 out/
-res/
+res/angular/

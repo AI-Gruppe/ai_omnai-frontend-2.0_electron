@@ -116,7 +116,7 @@ export class GraphComponent {
     computation: source => {
       // timestamps are sorted. First and last timestamp of each entry define the maximal domain that is needed for this
       const valueDomain = Object.values(source)
-        .flatMap(datalist => datalist.map(entry => entry.value)) // Alle 'value' Einträge extrahieren
+        .flatMap(datalist => datalist.map(entry => entry.value)) // extract all 'value' entries
         .reduce(
           (acc, curr) => [Math.min(acc[0], curr), Math.max(acc[1], curr)],
           [Infinity, -Infinity]
@@ -175,7 +175,7 @@ export class GraphComponent {
   trackWindowSize = effect(() => {
     const svgElement = this.plotContainer().nativeElement;
 
-    // ResizeObserver für die SVG-Größenänderung
+    // ResizeObserver for SVG-Sizechange
     const resizeObserver = new ResizeObserver(entries => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;

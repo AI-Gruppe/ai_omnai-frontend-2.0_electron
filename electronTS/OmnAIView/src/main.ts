@@ -3,12 +3,11 @@ import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 import * as fs from "fs-extra";
 
-// Prüfe, ob die App über Squirrel Startup gestartet wurde (Windows-Installer-Handling)
+// Check if app was started with squirell for install process
 if (require("electron-squirrel-startup")) app.quit();
 
 let backendProcess: ChildProcess | null = null; 
 
-// Backend starten
 function startBackend(): void {
   const exePath= app.isPackaged
   ? path.join(process.resourcesPath, "MiniOmni.exe")
@@ -18,7 +17,6 @@ function startBackend(): void {
     backendProcess = spawn(exePath, ["-w"]);}
 }
 
-// Backend stoppen
 function stopBackend(): void {
   if (backendProcess) {
     backendProcess.kill();
@@ -26,7 +24,6 @@ function stopBackend(): void {
   }
 }
 
-// Electron-Hauptfenster erstellen
 function createWindow(): void {
   const mainWindow: BrowserWindow = new BrowserWindow({
     width: 800,
@@ -44,7 +41,7 @@ function createWindow(): void {
   mainWindow.loadFile(indexPath).catch(err => console.error("Fehler beim Laden der HTML-Datei:", err));
 }
 
-// IPC-Handler für das Backend
+// IPC Handler for backend
 ipcMain.handle("start-backend", async () => {
   startBackend();
   return "Backend started.";
@@ -72,7 +69,7 @@ ipcMain.handle("run-omnai-command", (event, commandArgs: string[]) => {
 
 startBackend();
 
-// Electron-App initialisieren
+// start app
 app.whenReady().then(() => {
   createWindow();
 
@@ -83,7 +80,7 @@ app.whenReady().then(() => {
   });
 });
 
-// App beenden, wenn alle Fenster geschlossen wurden
+// close app 
 app.on("window-all-closed", () => {
   stopBackend();
 

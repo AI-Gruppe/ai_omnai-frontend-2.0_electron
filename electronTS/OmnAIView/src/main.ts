@@ -8,10 +8,16 @@ if (require("electron-squirrel-startup")) app.quit();
 
 let backendProcess: ChildProcess | null = null; 
 
+function getBackendPath(): string{
+  const exePath : string = app.isPackaged
+  ? path.join(process.resourcesPath, "MiniOmni.exe") // production 
+  : path.join(__dirname, "..", "res", "omnai", "MiniOmni.exe"); // development
+
+  return exePath; 
+}
+
 function startBackend(): void {
-  const exePath= app.isPackaged
-  ? path.join(process.resourcesPath, "MiniOmni.exe")
-  : path.join(__dirname, "res", "omnai", "MiniOmni.exe");
+  const exePath : string = getBackendPath(); 
 
   if(fs.existsSync(exePath)){
     backendProcess = spawn(exePath, ["-w"]);}
@@ -48,9 +54,7 @@ ipcMain.handle("start-backend", async () => {
 });
 
 ipcMain.handle("run-omnai-command", (event, commandArgs: string[]) => {
-  const exePath: string = app.isPackaged
-  ? path.join(process.resourcesPath, "MiniOmni.exe")
-  : path.join(__dirname, "res", "omnai", "MiniOmni.exe");
+  const exePath: string = getBackendPath(); 
 
   const omniProcess: ChildProcess = spawn(exePath, commandArgs);
 

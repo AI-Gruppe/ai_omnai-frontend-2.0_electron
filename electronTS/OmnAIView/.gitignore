@@ -88,5 +88,9 @@ typings/
 # Vite
 .vite/
 
+#tsc
+dist/
+
 # Electron-Forge
 out/
+res/

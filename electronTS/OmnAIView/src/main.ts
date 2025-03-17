@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 import * as fs from "fs-extra";
+import { createWindow } from "./renderer";
 
 // Check if app was started with squirell for install process
 if (require("electron-squirrel-startup")) app.quit();
@@ -28,23 +29,6 @@ function stopBackend(): void {
     backendProcess.kill();
     console.log("Backend process stopped.");
   }
-}
-
-function createWindow(): void {
-  const mainWindow: BrowserWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-      contextIsolation: true,
-      nodeIntegration: false,
-    },
-    autoHideMenuBar: true,
-    icon: path.join(__dirname, "res", "Icon.ico"),
-  });
-
-  const indexPath: string = path.join(__dirname, "..", "res", "angular", "browser", "index.html");
-  mainWindow.loadFile(indexPath).catch(err => console.error("Fehler beim Laden der HTML-Datei:", err));
 }
 
 // IPC Handler for backend

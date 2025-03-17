@@ -1,3 +1,9 @@
+type rgb = {
+  r: number;
+  g: number; 
+  b: number;
+};
+
 export interface DataFormat {
   timestamp: number;
   value: number;
@@ -5,7 +11,7 @@ export interface DataFormat {
 
 export interface DeviceInformation {
   UUID: string;
-  color: { r: number; g: number; b: number };
+  color: rgb;
 }
 
 /**
@@ -19,7 +25,7 @@ export interface DeviceOverview {
     UUID: string;
   }[];
   colors: {
-    color: { r: number; g: number; b: number };
+    color: rgb;
   }[];
 }
 

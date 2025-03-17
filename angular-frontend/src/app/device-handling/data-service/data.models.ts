@@ -29,6 +29,21 @@ export interface DeviceOverview {
   }[];
 }
 
+/**
+ * Defines the structure of the data transmitted from one or more OmnAI devices.
+ *
+ * Each device is identified by a unique UUID. The UUIDs of all connected devices 
+ * are sent as an array of strings (`string[]`).
+ *
+ * Every device collects data points that include a timestamp and a corresponding value. 
+ * Since all devices are synchronized, only a **single** timestamp is needed for all devices.
+ *
+ * The UUIDs in the array are **ordered** in the same sequence as the transmitted values. 
+ * This means:
+ * - The first UUID corresponds to the first value.
+ * - The second UUID corresponds to the second value.
+ * - And so on.
+ */
 export interface omnAIScopeData {
   devices: string[];
   data: {
